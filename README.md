@@ -94,8 +94,11 @@ The sync script reads YAML frontmatter, extracts typed relations, wikilinks, and
 ### Run
 
 ```bash
-npm run dev    # development
-npm run build  # production → out/
+npm run dev    # development (localhost:3000)
+
+# Production build — set basePath to match your deploy URL
+NEXT_BASE_PATH=/wiki-graph-ui npm run build   # → out/
+npm run build                                  # → out/ (no basePath, for root deploy)
 ```
 
 ### Deploy to GitHub Pages

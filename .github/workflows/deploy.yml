@@ -24,7 +24,7 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
-      - run: node node_modules/next/dist/bin/next build
+      - run: NEXT_BASE_PATH=/wiki-graph-ui node node_modules/next/dist/bin/next build
       - uses: actions/upload-pages-artifact@v3
         with:
           path: out/
