@@ -1,0 +1,1212 @@
+{
+  "nodes": [
+    {
+      "id": "log",
+      "title": "Log",
+      "type": "journal",
+      "summary": "- Domain: JTS operations, AI agent architecture, infrastructure",
+      "tags": [],
+      "path": "memory/log.md",
+      "status": "canonical",
+      "created_at": "",
+      "updated_at": "",
+      "importance": 1,
+      "recency": 9999,
+      "backlinks": 0,
+      "frontmatter_relations": {},
+      "wikilinks": [
+        "obsidian-vault"
+      ],
+      "preview": "# Wiki Log\n\n> Chronological record of all wiki actions. Append-only.\n> Format: `## [YYYY-MM-DD] action | subject`\n> Actions: ingest, update, query, lint, create, archive, delete, refactor\n> When this file exceeds 500 entries, rotate: rename to log-YYYY.md, start fresh.\n\n## [2026-07-07] create | Wiki initialized\n- Domain: JTS operations, AI agent architecture, infrastructure\n- Structure created with SCHEMA.md, index.md, log.md\n- Tag taxonomy: 30 tags across 4 categories (business, agent architect",
+      "agent_generated": false,
+      "reviewed_by": "human",
+      "confidence": "medium"
+    },
+    {
+      "id": "index",
+      "title": "Index",
+      "type": "hub",
+      "summary": "- hermes-agent \u2014 AI agent framework + Telegram gateway, the orchestrator layer",
+      "tags": [],
+      "path": "graphs/index.md",
+      "status": "canonical",
+      "created_at": "",
+      "updated_at": "",
+      "importance": 3,
+      "recency": 9999,
+      "backlinks": 0,
+      "frontmatter_relations": {},
+      "wikilinks": [
+        "mempalace",
+        "agent-delegation-protocol",
+        "gitnexus",
+        "llm-wiki",
+        "agent-skills",
+        "hermes-agent",
+        "model-routing",
+        "context-efficiency",
+        "security",
+        "goal-mode",
+        "fcc-proxy",
+        "agent-hierarchy",
+        "infrastructure"
+      ],
+      "preview": "# Wiki Index\n\n> Content catalog. Every canonical wiki page listed under its type with a one-line summary.\n> Read this first to find relevant pages for any query.\n> Last updated: 2026-07-08 | Total pages: 11 canonical + 2 drafts\n\n## Entities\n\n- [[hermes-agent]] \u2014 AI agent framework + Telegram gateway, the orchestrator layer\n- [[fcc-proxy]] \u2014 Free Claude Code proxy, primary coding agent on port 8082\n- [[mempalace]] \u2014 Persistent memory system, HNSW + BM25 semantic search, 40K+ drawers\n- [[gitnexus]",
+      "agent_generated": false,
+      "reviewed_by": "human",
+      "confidence": "medium"
+    },
+    {
+      "id": "SCHEMA",
+      "title": "Schema",
+      "type": "system",
+      "summary": "JTS Joe's Tech Solutions LLC operations, AI agent architecture, and the tools/infrastructure that power them. This wiki compiles knowledge from three intersecting domains:",
+      "tags": [],
+      "path": "system/SCHEMA.md",
+      "status": "canonical",
+      "created_at": "",
+      "updated_at": "",
+      "importance": 1,
+      "recency": 9999,
+      "backlinks": 0,
+      "frontmatter_relations": {},
+      "wikilinks": [
+        "wikilinks"
+      ],
+      "preview": "# Wiki Schema\n\n## Domain\n\nJTS (Joe's Tech Solutions LLC) operations, AI agent architecture, and the tools/infrastructure that power them. This wiki compiles knowledge from three intersecting domains:\n\n1. **JTS Business** \u2014 service offerings, client work, go-to-market, content pipeline, brand strategy\n2. **AI Agent Stack** \u2014 Hermes, FCC, MemPalace, GitNexus, Agent-Skills, model routing, delegation protocols\n3. **Infrastructure** \u2014 WSL2 host, systemd services, Docker, security, networking, deploym",
+      "agent_generated": false,
+      "reviewed_by": "human",
+      "confidence": "medium"
+    },
+    {
+      "id": "AGENTS",
+      "title": "Agents",
+      "type": "system",
+      "summary": "Machine-readable routing for AI agents working in this vault.",
+      "tags": [],
+      "path": "system/AGENTS.md",
+      "status": "canonical",
+      "created_at": "",
+      "updated_at": "",
+      "importance": 1,
+      "recency": 9999,
+      "backlinks": 0,
+      "frontmatter_relations": {},
+      "wikilinks": [],
+      "preview": "# Agent Operating Rules\n\nMachine-readable routing for AI agents working in this vault.\n\n## Agents\n\n### ingestion\n\n| Field | Value |\n|-------|-------|\n| Read scope | `inbox/`, source URLs/files passed in prompt |\n| Write scope | `inbox/`, `agent-output/` (drafts only) |\n| Forbidden | `knowledge/`, `archive/`, `system/`, `memory/` |\n| Promotion | Never promotes. Outputs `status: draft`, `agent_generated: true`, `reviewed_by: unreviewed` |\n| Review checkpoint | Linker or human reviews before any dr",
+      "agent_generated": false,
+      "reviewed_by": "human",
+      "confidence": "medium"
+    },
+    {
+      "id": "infrastructure",
+      "title": "Infrastructure",
+      "type": "concept",
+      "summary": "The JTS stack runs on a single WSL2 Ubuntu host. All services are local, loopback-only, and managed via systemd or Docker.",
+      "tags": [
+        "infrastructure",
+        "host-environment"
+      ],
+      "path": "knowledge/concepts/infrastructure.md",
+      "status": "canonical",
+      "created_at": "2026-07-07",
+      "updated_at": "2026-07-08",
+      "importance": 3,
+      "recency": 0,
+      "backlinks": 5,
+      "frontmatter_relations": {
+        "depends_on": [],
+        "part_of": [],
+        "relates_to": [
+          "security",
+          "hermes-agent",
+          "fcc-proxy",
+          "mempalace",
+          "model-routing"
+        ],
+        "supersedes": []
+      },
+      "wikilinks": [
+        "mempalace",
+        "hermes-agent",
+        "security",
+        "fcc-proxy",
+        "model-routing"
+      ],
+      "preview": "# Infrastructure\n\nThe JTS stack runs on a single WSL2 Ubuntu host. All services are local, loopback-only, and managed via systemd or Docker.\n\n## Host\n\n- **Host:** joBlade (WSL2 Ubuntu)\n- **Shell:** zsh\n- **Node:** v22.22.2\n- **pnpm:** 10.33.3\n- **Python:** 3.12 (Hermes venv + MemPalace venv), 3.11 (system)\n- **uv:** 0.11.12\n\n## Service Matrix\n\n| Service | Port | Bind | Method | Status |\n|---------|------|------|--------|--------|\n| Ollama | 11434 | 127.0.0.1 | systemd (system) | \u2705 |\n| Hermes Gat",
+      "agent_generated": false,
+      "reviewed_by": "human",
+      "confidence": "high"
+    },
+    {
+      "id": "security",
+      "title": "Security",
+      "type": "concept",
+      "summary": "All services in the JTS stack follow strict security rules. These are non-negotiable.",
+      "tags": [
+        "security",
+        "infrastructure",
+        "pattern"
+      ],
+      "path": "knowledge/concepts/security.md",
+      "status": "canonical",
+      "created_at": "2026-07-07",
+      "updated_at": "2026-07-08",
+      "importance": 3,
+      "recency": 0,
+      "backlinks": 5,
+      "frontmatter_relations": {
+        "depends_on": [],
+        "part_of": [
+          "infrastructure"
+        ],
+        "relates_to": [
+          "fcc-proxy",
+          "hermes-agent"
+        ],
+        "supersedes": []
+      },
+      "wikilinks": [
+        "fcc-proxy",
+        "hermes-agent",
+        "infrastructure"
+      ],
+      "preview": "# Security Rules\n\nAll services in the JTS stack follow strict security rules. These are non-negotiable.\n\n## Rules\n\n1. **ALL services bind to 127.0.0.1 only** \u2014 no external exposure\n2. File permissions: 600 for .env/config, 700 for sensitive dirs\n3. Docker: no-new-privileges, cap_drop ALL, read_only fs\n4. No `latest` tags in Docker images\n5. Telemetry disabled everywhere\n6. Ollama Docker bridge disabled\n7. Telegram handled by Hermes ONLY\n8. iptables firewall: DROP policy on INPUT (except loopback",
+      "agent_generated": false,
+      "reviewed_by": "human",
+      "confidence": "high"
+    },
+    {
+      "id": "agent-hierarchy",
+      "title": "Agent Hierarchy",
+      "type": "concept",
+      "summary": "The JTS agent stack is a single-orchestrator multi-worker architecture. hermes-agent Lurkr is the sole entry point \u2014 all requests flow through it, and it delegates to specialized tools.",
+      "tags": [
+        "agent-architecture",
+        "pattern"
+      ],
+      "path": "knowledge/concepts/agent-hierarchy.md",
+      "status": "canonical",
+      "created_at": "2026-07-07",
+      "updated_at": "2026-07-08",
+      "importance": 5,
+      "recency": 0,
+      "backlinks": 14,
+      "frontmatter_relations": {
+        "depends_on": [
+          "hermes-agent"
+        ],
+        "part_of": [],
+        "relates_to": [
+          "context-efficiency",
+          "fcc-proxy",
+          "mempalace",
+          "gitnexus",
+          "agent-skills"
+        ],
+        "supersedes": []
+      },
+      "wikilinks": [
+        "mempalace",
+        "agent-delegation-protocol",
+        "gitnexus",
+        "agent-skills",
+        "hermes-agent",
+        "context-efficiency",
+        "fcc-proxy"
+      ],
+      "preview": "# Agent Hierarchy\n\nThe JTS agent stack is a single-orchestrator multi-worker architecture. [[hermes-agent]] (Lurkr) is the sole entry point \u2014 all requests flow through it, and it delegates to specialized tools.\n\n## Current Hierarchy\n\n```\nLurkr (Hermes) \u2500\u2500 orchestrator (you are here)\n  \u251c\u2500\u2500 fcc (free-claude-code proxy :8082) \u2500\u2500 primary coding agent\n  \u2502     \u251c\u2500\u2500 Agent-Skills (24 SDLC skills)\n  \u2502     \u2514\u2500\u2500 Superpowers (13 workflow skills)\n  \u251c\u2500\u2500 GitNexus \u2500\u2500 code knowledge graph\n  \u251c\u2500\u2500 MemPalace \u2500\u2500 persis",
+      "agent_generated": false,
+      "reviewed_by": "human",
+      "confidence": "high"
+    },
+    {
+      "id": "llm-wiki",
+      "title": "LLM Wiki",
+      "type": "concept",
+      "summary": "The LLM Wiki is a persistent, compounding knowledge base as interlinked markdown files. Based on Andrej Karpathy's LLM Wiki patternhttps://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f.",
+      "tags": [
+        "memory-systems",
+        "pattern",
+        "tooling"
+      ],
+      "path": "knowledge/concepts/llm-wiki.md",
+      "status": "canonical",
+      "created_at": "2026-07-07",
+      "updated_at": "2026-07-08",
+      "importance": 3,
+      "recency": 0,
+      "backlinks": 5,
+      "frontmatter_relations": {
+        "depends_on": [
+          "mempalace"
+        ],
+        "part_of": [],
+        "relates_to": [
+          "context-efficiency"
+        ],
+        "supersedes": []
+      },
+      "wikilinks": [
+        "mempalace",
+        "context-efficiency"
+      ],
+      "preview": "# LLM Wiki (Karpathy Pattern)\n\nThe LLM Wiki is a persistent, compounding knowledge base as interlinked markdown files. Based on [Andrej Karpathy's LLM Wiki pattern](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f).\n\nUnlike traditional RAG (which rediscovers knowledge from scratch per query), the wiki compiles knowledge once and keeps it current. Cross-references are already there. Contradictions have already been flagged. Synthesis reflects everything ingested.\n\n## Division of ",
+      "agent_generated": false,
+      "reviewed_by": "human",
+      "confidence": "high"
+    },
+    {
+      "id": "context-efficiency",
+      "title": "Context Efficiency",
+      "type": "concept",
+      "summary": "How to keep memory across sub-agents while keeping token usage low \u2014 only loading minimal context per agent.",
+      "tags": [
+        "agent-architecture",
+        "memory-systems",
+        "pattern"
+      ],
+      "path": "knowledge/concepts/context-efficiency.md",
+      "status": "canonical",
+      "created_at": "2026-07-07",
+      "updated_at": "2026-07-08",
+      "importance": 5,
+      "recency": 0,
+      "backlinks": 9,
+      "frontmatter_relations": {
+        "depends_on": [
+          "mempalace"
+        ],
+        "part_of": [],
+        "relates_to": [
+          "agent-hierarchy",
+          "llm-wiki"
+        ],
+        "supersedes": []
+      },
+      "wikilinks": [
+        "llm-wiki",
+        "mempalace",
+        "agent-delegation-protocol",
+        "agent-hierarchy"
+      ],
+      "preview": "# Context Efficiency in Multi-Agent Systems\n\nHow to keep memory across sub-agents while keeping token usage low \u2014 only loading minimal context per agent.\n\n## The Problem\n\nNaive multi-agent systems pass the full conversation history to every sub-agent. This is wasteful: tokens cost money, and most context is irrelevant to any specific sub-task. The question is how to give each agent *just enough* context to do its job.\n\n## Patterns (2025-2026)\n\n### Context Routing\nThe orchestrator does NOT pass f",
+      "agent_generated": false,
+      "reviewed_by": "human",
+      "confidence": "high"
+    },
+    {
+      "id": "model-routing",
+      "title": "Model Routing",
+      "type": "concept",
+      "summary": "How models are selected across the JTS stack \u2014 the strategy for balancing cost, capability, and availability.",
+      "tags": [
+        "model-routing",
+        "decision",
+        "infrastructure"
+      ],
+      "path": "knowledge/concepts/model-routing.md",
+      "status": "canonical",
+      "created_at": "2026-07-07",
+      "updated_at": "2026-07-08",
+      "importance": 5,
+      "recency": 0,
+      "backlinks": 10,
+      "frontmatter_relations": {
+        "depends_on": [
+          "hermes-agent",
+          "fcc-proxy"
+        ],
+        "part_of": [
+          "infrastructure"
+        ],
+        "relates_to": [],
+        "supersedes": []
+      },
+      "wikilinks": [
+        "fcc-proxy",
+        "infrastructure",
+        "hermes-agent",
+        "goal-mode"
+      ],
+      "preview": "# Model Routing\n\nHow models are selected across the JTS stack \u2014 the strategy for balancing cost, capability, and availability.\n\n## Current Routing (2026-07-07)\n\n| Use Case | Model | Provider | Cost |\n|----------|-------|----------|------|\n| Interactive (Lurkr main) | stepfun-ai/step-3.5-flash | NVIDIA NIM | Free |\n| Cron jobs | glm-5.2:cloud | Ollama Cloud | Cheap |\n| Goal-mode judge | kimi-k2.7-code:cloud | Ollama Cloud | Cheap |\n| Coding (FCC Opus tier) | DeepSeek V4 Flash | NVIDIA NIM | Free ",
+      "agent_generated": false,
+      "reviewed_by": "human",
+      "confidence": "high"
+    },
+    {
+      "id": "agent-skills",
+      "title": "Agent-Skills",
+      "type": "tool",
+      "summary": "24 SDLC skills + 4 personas + 8 slash commands from Addy Osmani's agent-skills repo. Provides a structured software development lifecycle for fcc-proxy.",
+      "tags": [
+        "skills",
+        "agent-architecture",
+        "tooling"
+      ],
+      "path": "knowledge/entities/agent-skills.md",
+      "status": "canonical",
+      "created_at": "2026-07-07",
+      "updated_at": "2026-07-08",
+      "importance": 4,
+      "recency": 0,
+      "backlinks": 7,
+      "frontmatter_relations": {
+        "depends_on": [
+          "fcc-proxy"
+        ],
+        "part_of": [
+          "agent-hierarchy"
+        ],
+        "relates_to": [
+          "model-routing"
+        ],
+        "supersedes": []
+      },
+      "wikilinks": [
+        "fcc-proxy",
+        "agent-hierarchy",
+        "goal-mode"
+      ],
+      "preview": "# Agent-Skills (Addy Osmani SDLC Skills)\n\n24 SDLC skills + 4 personas + 8 slash commands from Addy Osmani's agent-skills repo. Provides a structured software development lifecycle for [[fcc-proxy]].\n\n## Setup\n\n- **Repo:** `~/agent-skills/` (github.com/addyosmani/agent-skills)\n- **Plugin:** installed as `agent-skills@addy-agent-skills` in Claude Code\n- **Location:** `~/.claude/plugins/cache/addy-agent-skills/agent-skills/1.0.0/`\n- **Also copied to:** `~/.claude/skills/` and `~/.hermes/skills/engi",
+      "agent_generated": false,
+      "reviewed_by": "human",
+      "confidence": "high"
+    },
+    {
+      "id": "fcc-proxy",
+      "title": "FCC Proxy",
+      "type": "tool",
+      "summary": "FCC is the primary coding agent \u2014 a proxy server that translates Anthropic API calls to free/cheap model providers, enabling Claude Code CLI to run without an Anthropic subscription.",
+      "tags": [
+        "code-generation",
+        "infrastructure",
+        "tooling"
+      ],
+      "path": "knowledge/entities/fcc-proxy.md",
+      "status": "canonical",
+      "created_at": "2026-07-07",
+      "updated_at": "2026-07-08",
+      "importance": 5,
+      "recency": 0,
+      "backlinks": 16,
+      "frontmatter_relations": {
+        "depends_on": [
+          "hermes-agent"
+        ],
+        "part_of": [
+          "agent-hierarchy"
+        ],
+        "relates_to": [
+          "agent-skills",
+          "model-routing",
+          "security"
+        ],
+        "supersedes": []
+      },
+      "wikilinks": [
+        "agent-skills",
+        "model-routing",
+        "hermes-agent",
+        "security"
+      ],
+      "preview": "# FCC (Free Claude Code) Proxy\n\nFCC is the primary coding agent \u2014 a proxy server that translates Anthropic API calls to free/cheap model providers, enabling Claude Code CLI to run without an Anthropic subscription.\n\n## Architecture\n\n- **Proxy URL:** `http://127.0.0.1:8082`\n- **Binary:** `~/.hermes/node/bin/claude` (Claude CLI)\n- **Code:** `~/free-claude-code/` (Python venv)\n- **Config:** `~/free-claude-code/.env` \u2014 controls model mapping (MODEL_OPUS, MODEL_SONNET, MODEL_HAIKU)\n- **Service:** `fr",
+      "agent_generated": false,
+      "reviewed_by": "human",
+      "confidence": "high"
+    },
+    {
+      "id": "gitnexus",
+      "title": "GitNexus",
+      "type": "tool",
+      "summary": "Code knowledge graph \u2014 indexes codebases into a queryable graph of symbols, calls, references, and communities.",
+      "tags": [
+        "tooling",
+        "infrastructure",
+        "code-generation"
+      ],
+      "path": "knowledge/entities/gitnexus.md",
+      "status": "canonical",
+      "created_at": "2026-07-07",
+      "updated_at": "2026-07-08",
+      "importance": 3,
+      "recency": 0,
+      "backlinks": 5,
+      "frontmatter_relations": {
+        "depends_on": [
+          "hermes-agent"
+        ],
+        "part_of": [
+          "agent-hierarchy"
+        ],
+        "relates_to": [
+          "fcc-proxy",
+          "hermes-agent"
+        ],
+        "supersedes": []
+      },
+      "wikilinks": [
+        "fcc-proxy",
+        "agent-hierarchy",
+        "hermes-agent"
+      ],
+      "preview": "# GitNexus\n\nCode knowledge graph \u2014 indexes codebases into a queryable graph of symbols, calls, references, and communities.\n\n## Setup\n\n- **Binary:** `~/.hermes/node/bin/gitnexus`\n- **Version:** 1.6.3\n- **Data:** `~/.gitnexus/registry.json`\n\n## Indexed Repos\n\n| Repo | Path | Nodes | Edges | Communities |\n|------|------|-------|-------|-------------|\n| jcode | ~/jcode | 29,220 | 71,442 | 1,233 |\n| open-design | ~/open-design | 16,535 | 23,907 | 449 |\n| mempalace | ~/mempalace | 7,927 | 11,886 | 19",
+      "agent_generated": false,
+      "reviewed_by": "human",
+      "confidence": "high"
+    },
+    {
+      "id": "hermes-agent",
+      "title": "Hermes Agent",
+      "type": "tool",
+      "summary": "Hermes is the AI agent framework and Telegram gateway that runs JTS operations. It's the orchestrator layer \u2014 Lurkr the AI personality runs inside Hermes, receiving requests via Telegram and API, dele",
+      "tags": [
+        "agent-architecture",
+        "infrastructure",
+        "tooling"
+      ],
+      "path": "knowledge/entities/hermes-agent.md",
+      "status": "canonical",
+      "created_at": "2026-07-07",
+      "updated_at": "2026-07-08",
+      "importance": 5,
+      "recency": 0,
+      "backlinks": 20,
+      "frontmatter_relations": {
+        "depends_on": [
+          "fcc-proxy",
+          "mempalace"
+        ],
+        "part_of": [
+          "agent-hierarchy"
+        ],
+        "relates_to": [
+          "model-routing",
+          "gitnexus",
+          "agent-skills"
+        ],
+        "supersedes": []
+      },
+      "wikilinks": [
+        "fcc-proxy",
+        "agent-hierarchy",
+        "mempalace",
+        "model-routing"
+      ],
+      "preview": "# Hermes Agent\n\nHermes is the AI agent framework and Telegram gateway that runs JTS operations. It's the orchestrator layer \u2014 Lurkr (the AI personality) runs inside Hermes, receiving requests via Telegram and API, delegating to sub-agents, and managing the tool stack.\n\n## Architecture\n\n- **Code:** `~/.hermes/hermes-agent/` (Python venv)\n- **Config:** `~/.hermes/config.yaml` (600 permissions)\n- **Env:** `~/.hermes/.env` (600 permissions, credential store)\n- **Service:** `hermes-gateway.service` (",
+      "agent_generated": false,
+      "reviewed_by": "human",
+      "confidence": "high"
+    },
+    {
+      "id": "mempalace",
+      "title": "MemPalace",
+      "type": "tool",
+      "summary": "MemPalace is the persistent memory system \u2014 a local-first, verbatim memory store with semantic search HNSW + BM25 and a knowledge graph. It's the raw memory layer of the stack.",
+      "tags": [
+        "memory-systems",
+        "tooling",
+        "infrastructure"
+      ],
+      "path": "knowledge/entities/mempalace.md",
+      "status": "canonical",
+      "created_at": "2026-07-07",
+      "updated_at": "2026-07-08",
+      "importance": 5,
+      "recency": 0,
+      "backlinks": 13,
+      "frontmatter_relations": {
+        "depends_on": [
+          "hermes-agent"
+        ],
+        "part_of": [],
+        "relates_to": [
+          "llm-wiki",
+          "hermes-agent",
+          "agent-hierarchy",
+          "context-efficiency"
+        ],
+        "supersedes": []
+      },
+      "wikilinks": [
+        "llm-wiki",
+        "hermes-agent",
+        "agent-delegation-protocol",
+        "context-efficiency"
+      ],
+      "preview": "# MemPalace\n\nMemPalace is the persistent memory system \u2014 a local-first, verbatim memory store with semantic search (HNSW + BM25) and a knowledge graph. It's the raw memory layer of the stack.\n\n## Architecture\n\n- **Install:** `~/mempalace/` (Python venv at `~/mempalace/.venv/`)\n- **Data:** `~/.mempalace/` (700 permissions)\n- **MCP binary:** `~/mempalace/.venv/bin/mempalace-mcp`\n- **Config:** `~/.mempalace/config.json`\n- **MCP server:** registered in Hermes config as `mcp_servers.mempalace`\n- **St",
+      "agent_generated": false,
+      "reviewed_by": "human",
+      "confidence": "high"
+    },
+    {
+      "id": "goal-mode",
+      "title": "Goal Mode",
+      "type": "concept",
+      "summary": "Goal mode drives a task to completion using a maker-judge pattern. The maker agent works; the judge model reads the transcript after every turn and decides if the goal is met.",
+      "tags": [
+        "agent-architecture",
+        "pattern"
+      ],
+      "path": "agent-output/draft-goal-mode.md",
+      "status": "draft",
+      "created_at": "2026-07-08",
+      "updated_at": "2026-07-08",
+      "importance": 2,
+      "recency": 0,
+      "backlinks": 3,
+      "frontmatter_relations": {
+        "depends_on": [
+          "hermes-agent"
+        ],
+        "part_of": [
+          "agent-hierarchy"
+        ],
+        "relates_to": [
+          "model-routing",
+          "agent-skills"
+        ],
+        "supersedes": []
+      },
+      "wikilinks": [
+        "model-routing"
+      ],
+      "preview": "# Goal Mode\n\nGoal mode drives a task to completion using a maker-judge pattern. The maker agent works; the judge model reads the transcript after every turn and decides if the goal is met.\n\n## How it works\n\n- Maker keeps going until judge agrees goal is met\n- Judge only reads conversation \u2014 cannot run tests, read files, or check site\n- Maker MUST paste proof \u2014 \"done when tests pass\" is a wish, \"done when green test run pasted in chat\" is a contract\n- Wrapper: `~/.hermes/scripts/goal-mode.sh <nam",
+      "agent_generated": true,
+      "reviewed_by": "unreviewed",
+      "confidence": "high"
+    },
+    {
+      "id": "agent-delegation-protocol",
+      "title": "Agent Delegation Protocol",
+      "type": "concept",
+      "summary": "The delegation protocol defines how hermes-agent Lurkr routes work to sub-agents and tools. It's the operational layer beneath the agent-hierarchy.",
+      "tags": [
+        "agent-architecture",
+        "pattern"
+      ],
+      "path": "agent-output/draft-agent-delegation-protocol.md",
+      "status": "draft",
+      "created_at": "2026-07-08",
+      "updated_at": "2026-07-08",
+      "importance": 3,
+      "recency": 0,
+      "backlinks": 4,
+      "frontmatter_relations": {
+        "depends_on": [
+          "hermes-agent"
+        ],
+        "part_of": [
+          "agent-hierarchy"
+        ],
+        "relates_to": [
+          "context-efficiency",
+          "mempalace"
+        ],
+        "supersedes": []
+      },
+      "wikilinks": [
+        "mempalace",
+        "gitnexus",
+        "hermes-agent",
+        "context-efficiency",
+        "fcc-proxy",
+        "agent-hierarchy"
+      ],
+      "preview": "# Agent Delegation Protocol\n\nThe delegation protocol defines how [[hermes-agent]] (Lurkr) routes work to sub-agents and tools. It's the operational layer beneath the [[agent-hierarchy]].\n\n## Flow\n\n1. Lurkr receives requests via Telegram or API\n2. Coding tasks \u2192 [[fcc-proxy]] (Claude CLI via proxy)\n3. Complex multi-step operations \u2192 `delegate_task()` with context injection\n4. Code understanding \u2192 [[gitnexus]] queries first\n5. Cross-session memory \u2192 [[mempalace]] store/retrieve\n\n## Pre-Delegate Re",
+      "agent_generated": true,
+      "reviewed_by": "unreviewed",
+      "confidence": "high"
+    }
+  ],
+  "links": [
+    {
+      "source": "index",
+      "target": "mempalace",
+      "type": "related_to"
+    },
+    {
+      "source": "index",
+      "target": "agent-delegation-protocol",
+      "type": "related_to"
+    },
+    {
+      "source": "index",
+      "target": "gitnexus",
+      "type": "related_to"
+    },
+    {
+      "source": "index",
+      "target": "llm-wiki",
+      "type": "related_to"
+    },
+    {
+      "source": "index",
+      "target": "agent-skills",
+      "type": "related_to"
+    },
+    {
+      "source": "index",
+      "target": "hermes-agent",
+      "type": "related_to"
+    },
+    {
+      "source": "index",
+      "target": "model-routing",
+      "type": "related_to"
+    },
+    {
+      "source": "index",
+      "target": "context-efficiency",
+      "type": "related_to"
+    },
+    {
+      "source": "index",
+      "target": "security",
+      "type": "related_to"
+    },
+    {
+      "source": "index",
+      "target": "goal-mode",
+      "type": "related_to"
+    },
+    {
+      "source": "index",
+      "target": "fcc-proxy",
+      "type": "related_to"
+    },
+    {
+      "source": "index",
+      "target": "agent-hierarchy",
+      "type": "related_to"
+    },
+    {
+      "source": "index",
+      "target": "infrastructure",
+      "type": "related_to"
+    },
+    {
+      "source": "infrastructure",
+      "target": "security",
+      "type": "relates_to"
+    },
+    {
+      "source": "infrastructure",
+      "target": "hermes-agent",
+      "type": "relates_to"
+    },
+    {
+      "source": "infrastructure",
+      "target": "fcc-proxy",
+      "type": "relates_to"
+    },
+    {
+      "source": "infrastructure",
+      "target": "mempalace",
+      "type": "relates_to"
+    },
+    {
+      "source": "infrastructure",
+      "target": "model-routing",
+      "type": "relates_to"
+    },
+    {
+      "source": "infrastructure",
+      "target": "mempalace",
+      "type": "related_to"
+    },
+    {
+      "source": "infrastructure",
+      "target": "hermes-agent",
+      "type": "related_to"
+    },
+    {
+      "source": "infrastructure",
+      "target": "security",
+      "type": "related_to"
+    },
+    {
+      "source": "infrastructure",
+      "target": "fcc-proxy",
+      "type": "related_to"
+    },
+    {
+      "source": "infrastructure",
+      "target": "model-routing",
+      "type": "related_to"
+    },
+    {
+      "source": "security",
+      "target": "infrastructure",
+      "type": "part_of"
+    },
+    {
+      "source": "security",
+      "target": "fcc-proxy",
+      "type": "relates_to"
+    },
+    {
+      "source": "security",
+      "target": "hermes-agent",
+      "type": "relates_to"
+    },
+    {
+      "source": "security",
+      "target": "fcc-proxy",
+      "type": "related_to"
+    },
+    {
+      "source": "security",
+      "target": "hermes-agent",
+      "type": "related_to"
+    },
+    {
+      "source": "security",
+      "target": "infrastructure",
+      "type": "related_to"
+    },
+    {
+      "source": "agent-hierarchy",
+      "target": "hermes-agent",
+      "type": "depends_on"
+    },
+    {
+      "source": "agent-hierarchy",
+      "target": "context-efficiency",
+      "type": "relates_to"
+    },
+    {
+      "source": "agent-hierarchy",
+      "target": "fcc-proxy",
+      "type": "relates_to"
+    },
+    {
+      "source": "agent-hierarchy",
+      "target": "mempalace",
+      "type": "relates_to"
+    },
+    {
+      "source": "agent-hierarchy",
+      "target": "gitnexus",
+      "type": "relates_to"
+    },
+    {
+      "source": "agent-hierarchy",
+      "target": "agent-skills",
+      "type": "relates_to"
+    },
+    {
+      "source": "agent-hierarchy",
+      "target": "mempalace",
+      "type": "related_to"
+    },
+    {
+      "source": "agent-hierarchy",
+      "target": "agent-delegation-protocol",
+      "type": "related_to"
+    },
+    {
+      "source": "agent-hierarchy",
+      "target": "gitnexus",
+      "type": "related_to"
+    },
+    {
+      "source": "agent-hierarchy",
+      "target": "agent-skills",
+      "type": "related_to"
+    },
+    {
+      "source": "agent-hierarchy",
+      "target": "hermes-agent",
+      "type": "related_to"
+    },
+    {
+      "source": "agent-hierarchy",
+      "target": "context-efficiency",
+      "type": "related_to"
+    },
+    {
+      "source": "agent-hierarchy",
+      "target": "fcc-proxy",
+      "type": "related_to"
+    },
+    {
+      "source": "llm-wiki",
+      "target": "mempalace",
+      "type": "depends_on"
+    },
+    {
+      "source": "llm-wiki",
+      "target": "context-efficiency",
+      "type": "relates_to"
+    },
+    {
+      "source": "llm-wiki",
+      "target": "mempalace",
+      "type": "related_to"
+    },
+    {
+      "source": "llm-wiki",
+      "target": "context-efficiency",
+      "type": "related_to"
+    },
+    {
+      "source": "context-efficiency",
+      "target": "mempalace",
+      "type": "depends_on"
+    },
+    {
+      "source": "context-efficiency",
+      "target": "agent-hierarchy",
+      "type": "relates_to"
+    },
+    {
+      "source": "context-efficiency",
+      "target": "llm-wiki",
+      "type": "relates_to"
+    },
+    {
+      "source": "context-efficiency",
+      "target": "llm-wiki",
+      "type": "related_to"
+    },
+    {
+      "source": "context-efficiency",
+      "target": "mempalace",
+      "type": "related_to"
+    },
+    {
+      "source": "context-efficiency",
+      "target": "agent-delegation-protocol",
+      "type": "related_to"
+    },
+    {
+      "source": "context-efficiency",
+      "target": "agent-hierarchy",
+      "type": "related_to"
+    },
+    {
+      "source": "model-routing",
+      "target": "hermes-agent",
+      "type": "depends_on"
+    },
+    {
+      "source": "model-routing",
+      "target": "fcc-proxy",
+      "type": "depends_on"
+    },
+    {
+      "source": "model-routing",
+      "target": "infrastructure",
+      "type": "part_of"
+    },
+    {
+      "source": "model-routing",
+      "target": "fcc-proxy",
+      "type": "related_to"
+    },
+    {
+      "source": "model-routing",
+      "target": "infrastructure",
+      "type": "related_to"
+    },
+    {
+      "source": "model-routing",
+      "target": "hermes-agent",
+      "type": "related_to"
+    },
+    {
+      "source": "model-routing",
+      "target": "goal-mode",
+      "type": "related_to"
+    },
+    {
+      "source": "agent-skills",
+      "target": "fcc-proxy",
+      "type": "depends_on"
+    },
+    {
+      "source": "agent-skills",
+      "target": "agent-hierarchy",
+      "type": "part_of"
+    },
+    {
+      "source": "agent-skills",
+      "target": "model-routing",
+      "type": "relates_to"
+    },
+    {
+      "source": "agent-skills",
+      "target": "fcc-proxy",
+      "type": "related_to"
+    },
+    {
+      "source": "agent-skills",
+      "target": "agent-hierarchy",
+      "type": "related_to"
+    },
+    {
+      "source": "agent-skills",
+      "target": "goal-mode",
+      "type": "related_to"
+    },
+    {
+      "source": "fcc-proxy",
+      "target": "hermes-agent",
+      "type": "depends_on"
+    },
+    {
+      "source": "fcc-proxy",
+      "target": "agent-hierarchy",
+      "type": "part_of"
+    },
+    {
+      "source": "fcc-proxy",
+      "target": "agent-skills",
+      "type": "relates_to"
+    },
+    {
+      "source": "fcc-proxy",
+      "target": "model-routing",
+      "type": "relates_to"
+    },
+    {
+      "source": "fcc-proxy",
+      "target": "security",
+      "type": "relates_to"
+    },
+    {
+      "source": "fcc-proxy",
+      "target": "agent-skills",
+      "type": "related_to"
+    },
+    {
+      "source": "fcc-proxy",
+      "target": "model-routing",
+      "type": "related_to"
+    },
+    {
+      "source": "fcc-proxy",
+      "target": "hermes-agent",
+      "type": "related_to"
+    },
+    {
+      "source": "fcc-proxy",
+      "target": "security",
+      "type": "related_to"
+    },
+    {
+      "source": "gitnexus",
+      "target": "hermes-agent",
+      "type": "depends_on"
+    },
+    {
+      "source": "gitnexus",
+      "target": "agent-hierarchy",
+      "type": "part_of"
+    },
+    {
+      "source": "gitnexus",
+      "target": "fcc-proxy",
+      "type": "relates_to"
+    },
+    {
+      "source": "gitnexus",
+      "target": "hermes-agent",
+      "type": "relates_to"
+    },
+    {
+      "source": "gitnexus",
+      "target": "fcc-proxy",
+      "type": "related_to"
+    },
+    {
+      "source": "gitnexus",
+      "target": "agent-hierarchy",
+      "type": "related_to"
+    },
+    {
+      "source": "gitnexus",
+      "target": "hermes-agent",
+      "type": "related_to"
+    },
+    {
+      "source": "hermes-agent",
+      "target": "fcc-proxy",
+      "type": "depends_on"
+    },
+    {
+      "source": "hermes-agent",
+      "target": "mempalace",
+      "type": "depends_on"
+    },
+    {
+      "source": "hermes-agent",
+      "target": "agent-hierarchy",
+      "type": "part_of"
+    },
+    {
+      "source": "hermes-agent",
+      "target": "model-routing",
+      "type": "relates_to"
+    },
+    {
+      "source": "hermes-agent",
+      "target": "gitnexus",
+      "type": "relates_to"
+    },
+    {
+      "source": "hermes-agent",
+      "target": "agent-skills",
+      "type": "relates_to"
+    },
+    {
+      "source": "hermes-agent",
+      "target": "fcc-proxy",
+      "type": "related_to"
+    },
+    {
+      "source": "hermes-agent",
+      "target": "agent-hierarchy",
+      "type": "related_to"
+    },
+    {
+      "source": "hermes-agent",
+      "target": "mempalace",
+      "type": "related_to"
+    },
+    {
+      "source": "hermes-agent",
+      "target": "model-routing",
+      "type": "related_to"
+    },
+    {
+      "source": "mempalace",
+      "target": "hermes-agent",
+      "type": "depends_on"
+    },
+    {
+      "source": "mempalace",
+      "target": "llm-wiki",
+      "type": "relates_to"
+    },
+    {
+      "source": "mempalace",
+      "target": "hermes-agent",
+      "type": "relates_to"
+    },
+    {
+      "source": "mempalace",
+      "target": "agent-hierarchy",
+      "type": "relates_to"
+    },
+    {
+      "source": "mempalace",
+      "target": "context-efficiency",
+      "type": "relates_to"
+    },
+    {
+      "source": "mempalace",
+      "target": "llm-wiki",
+      "type": "related_to"
+    },
+    {
+      "source": "mempalace",
+      "target": "hermes-agent",
+      "type": "related_to"
+    },
+    {
+      "source": "mempalace",
+      "target": "agent-delegation-protocol",
+      "type": "related_to"
+    },
+    {
+      "source": "mempalace",
+      "target": "context-efficiency",
+      "type": "related_to"
+    },
+    {
+      "source": "goal-mode",
+      "target": "hermes-agent",
+      "type": "depends_on"
+    },
+    {
+      "source": "goal-mode",
+      "target": "agent-hierarchy",
+      "type": "part_of"
+    },
+    {
+      "source": "goal-mode",
+      "target": "model-routing",
+      "type": "relates_to"
+    },
+    {
+      "source": "goal-mode",
+      "target": "agent-skills",
+      "type": "relates_to"
+    },
+    {
+      "source": "goal-mode",
+      "target": "model-routing",
+      "type": "related_to"
+    },
+    {
+      "source": "agent-delegation-protocol",
+      "target": "hermes-agent",
+      "type": "depends_on"
+    },
+    {
+      "source": "agent-delegation-protocol",
+      "target": "agent-hierarchy",
+      "type": "part_of"
+    },
+    {
+      "source": "agent-delegation-protocol",
+      "target": "context-efficiency",
+      "type": "relates_to"
+    },
+    {
+      "source": "agent-delegation-protocol",
+      "target": "mempalace",
+      "type": "relates_to"
+    },
+    {
+      "source": "agent-delegation-protocol",
+      "target": "mempalace",
+      "type": "related_to"
+    },
+    {
+      "source": "agent-delegation-protocol",
+      "target": "gitnexus",
+      "type": "related_to"
+    },
+    {
+      "source": "agent-delegation-protocol",
+      "target": "hermes-agent",
+      "type": "related_to"
+    },
+    {
+      "source": "agent-delegation-protocol",
+      "target": "context-efficiency",
+      "type": "related_to"
+    },
+    {
+      "source": "agent-delegation-protocol",
+      "target": "fcc-proxy",
+      "type": "related_to"
+    },
+    {
+      "source": "agent-delegation-protocol",
+      "target": "agent-hierarchy",
+      "type": "related_to"
+    }
+  ],
+  "metadata": {
+    "vault_path": "/home/lurkr/wiki",
+    "synced_at": "2026-07-08T21:15:01.846629",
+    "node_count": 17,
+    "edge_count": 116,
+    "skipped_count": 0,
+    "skipped_files": []
+  }
+}
