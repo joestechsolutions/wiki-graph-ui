@@ -2,27 +2,29 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { GraphNode } from "@/lib/types";
-import { nodeColor } from "@/lib/theme";
+import { nodeColor, categoryColor } from "@/lib/theme";
 import { GRAPH_MODES, MODE_ORDER, type GraphMode } from "@/lib/graphModes";
 import { nodeMatchesSearch } from "@/lib/filters";
 
 interface CommandBarProps {
+  view?: "wiki" | "system";
   nodes: GraphNode[];
-  mode: GraphMode;
-  onModeChange: (m: GraphMode) => void;
+  mode?: GraphMode;
+  onModeChange?: (m: GraphMode) => void;
   onJumpTo: (id: string) => void;
-  search: string;
-  onSearchChange: (q: string) => void;
+  search?: string;
+  onSearchChange?: (q: string) => void;
   pathHint: string | null;
-  onToggleSidebar: () => void;
+  onToggleSidebar?: () => void;
 }
 
 export default function CommandBar({
+  view = "wiki",
   nodes,
   mode,
   onModeChange,
   onJumpTo,
-  search,
+  search = "",
   onSearchChange,
   pathHint,
   onToggleSidebar,
@@ -88,12 +90,36 @@ export default function CommandBar({
       <div className="flex items-center gap-2.5 pr-1 sm:pr-2">
         <div className="h-4 w-4 shrink-0 rounded-[5px] bg-gradient-to-br from-accent-teal to-accent-peri" />
         <span className="text-sm font-semibold tracking-tight text-ink">
-          Wiki Graph
+          {view === "system" ? "Agent System" : "Wiki Graph"}
         </span>
         <span className="hidden font-mono text-[10px] text-ink-faint sm:inline">
-          knowledge cockpit
+          {view === "system" ? "system topology" : "knowledge cockpit"}
         </span>
       </div>
+
+      {/* View switcher */}
+      <nav className="hidden items-center gap-1 rounded-lg border border-line bg-base-850 p-1 sm:flex">
+        <a
+          href="/"
+          className={`rounded-md px-3 py-1 text-xs font-medium transition-all duration-200 ${
+            view === "wiki"
+              ? "bg-accent-teal/15 text-accent-teal"
+              : "text-ink-muted hover:text-ink"
+          }`}
+        >
+          Wiki Graph
+        </a>
+        <a
+          href="/system/"
+          className={`rounded-md px-3 py-1 text-xs font-medium transition-all duration-200 ${
+            view === "system"
+              ? "bg-accent-teal/15 text-accent-teal"
+              : "text-ink-muted hover:text-ink"
+          }`}
+        >
+          Agent System
+        </a>
+      </nav>
 
       {/* Search */}
       <div className="relative w-full max-w-sm">
@@ -102,11 +128,11 @@ export default function CommandBar({
           <input
             ref={inputRef}
             value={search}
-            onChange={(e) => onSearchChange(e.target.value)}
+            onChange={(e) => onSearchChange?.(e.target.value)}
             onFocus={() => setOpen(true)}
             onBlur={() => setTimeout(() => setOpen(false), 120)}
             onKeyDown={onInputKey}
-            placeholder="Search notes, tags, content…"
+            placeholder={view === "system" ? "Search system nodes…" : "Search notes, tags, content…"}
             className="w-full bg-transparent text-sm text-ink placeholder:text-ink-faint focus:outline-none"
           />
           <kbd className="hidden rounded border border-line-soft px-1.5 py-0.5 font-mono text-[10px] text-ink-faint sm:inline">
@@ -130,11 +156,18 @@ export default function CommandBar({
                 >
                   <span
                     className="h-2 w-2 shrink-0 rounded-full"
-                    style={{ backgroundColor: nodeColor(n.type) }}
+                    style={{
+                      backgroundColor:
+                        view === "system"
+                          ? n.category
+                            ? categoryColor(n.category)
+                            : "#9ca3af"
+                          : nodeColor(n.type),
+                    }}
                   />
                   <span className="truncate text-sm text-ink">{n.title}</span>
                   <span className="ml-auto shrink-0 font-mono text-[10px] text-ink-faint">
-                    {n.type}
+                    {view === "system" ? n.category : n.type}
                   </span>
                 </button>
               </li>
@@ -144,26 +177,28 @@ export default function CommandBar({
       </div>
 
       {/* Mode switcher */}
-      <nav className="ml-auto flex shrink-0 items-center gap-1 overflow-x-auto rounded-lg border border-line bg-base-850 p-1 sm:overflow-visible">
-        {MODE_ORDER.map((m) => {
-          const def = GRAPH_MODES[m];
-          const isActive = mode === m;
-          return (
-            <button
-              key={m}
-              onClick={() => onModeChange(m)}
-              title={def.description}
-              className={`rounded-md px-3 py-1 text-xs font-medium transition-all duration-200 ease-smooth ${
-                isActive
-                  ? "bg-accent-teal/15 text-accent-teal"
-                  : "text-ink-muted hover:text-ink"
-              }`}
-            >
-              {def.label}
-            </button>
-          );
-        })}
-      </nav>
+      {mode && onModeChange && (
+        <nav className="ml-auto flex shrink-0 items-center gap-1 overflow-x-auto rounded-lg border border-line bg-base-850 p-1 sm:overflow-visible">
+          {MODE_ORDER.map((m) => {
+            const def = GRAPH_MODES[m];
+            const isActive = mode === m;
+            return (
+              <button
+                key={m}
+                onClick={() => onModeChange(m)}
+                title={def.description}
+                className={`rounded-md px-3 py-1 text-xs font-medium transition-all duration-200 ease-smooth ${
+                  isActive
+                    ? "bg-accent-teal/15 text-accent-teal"
+                    : "text-ink-muted hover:text-ink"
+                }`}
+              >
+                {def.label}
+              </button>
+            );
+          })}
+        </nav>
+      )}
 
       {pathHint && (
         <div className="hidden items-center gap-1.5 rounded-md border border-accent-teal/30 bg-accent-teal/10 px-2.5 py-1 font-mono text-[11px] text-accent-teal lg:flex">

@@ -1,4 +1,4 @@
-import type { NodeType, RelationType, NoteStatus } from "./types";
+import type { NodeType, RelationType, NoteStatus, NodeCategory } from "./types";
 
 /** Node colors by type (from the design spec, extended to cover all types). */
 export const NODE_COLORS: Record<NodeType, string> = {
@@ -22,6 +22,33 @@ export const NODE_COLORS: Record<NodeType, string> = {
 
 export function nodeColor(type: NodeType): string {
   return NODE_COLORS[type] ?? "#9ca3af";
+}
+
+/** Category colors for the agent-system view. */
+export const CATEGORY_COLORS: Record<NodeCategory, string> = {
+  orchestrator: "#00d4aa",
+  coding: "#00d4aa",
+  memory: "#7c8aff",
+  service: "#6b7280",
+  docker: "#4a5570",
+  llm: "#ffaa3d",
+  model: "#ffaa3d",
+  cron: "#f59e0b",
+  skill: "#7c8aff",
+  pipeline: "#a78bfa",
+  knowledge: "#00d4aa",
+  discipline: "#ef4444",
+  "code-intel": "#00d4aa",
+  skills: "#7c8aff",
+};
+
+export function categoryColor(category: NodeCategory | string | undefined): string {
+  return (category && CATEGORY_COLORS[category as NodeCategory]) ?? "#9ca3af";
+}
+
+/** Size multiplier for agent-system nodes by importance (1-5). */
+export function categoryNodeVal(importance: number): number {
+  return 1 + (importance ?? 1) * 1.4;
 }
 
 export interface EdgeStyle {

@@ -10,7 +10,7 @@ import ForceGraph3D, {
 } from "react-force-graph-3d";
 import type { GraphData, GraphNode, GraphLink } from "@/lib/types";
 import { endpointId } from "@/lib/types";
-import { nodeColor, edgeStyle } from "@/lib/theme";
+import { nodeColor, edgeStyle, categoryColor, categoryNodeVal } from "@/lib/theme";
 import type { ForceSettings } from "@/lib/graphModes";
 import { edgeKey } from "@/lib/pathfinding";
 
@@ -39,6 +39,16 @@ export interface Graph3DProps {
   onNodeClick: (node: GraphNode, event: MouseEvent) => void;
   onNodeHover: (node: GraphNode | null) => void;
   onBackgroundClick: () => void;
+  /** Color nodes by category instead of type. */
+  colorByCategory?: boolean;
+  /** Pulse nodes with these ids (e.g. cron jobs). */
+  pulseNodes?: Set<string>;
+  /** Optional base node value accessor. Defaults to importance. */
+  nodeVal?: (n: GraphNode) => number;
+  /** Optional extra scale multiplier applied on top of nodeVal. */
+  nodeValScale?: number;
+  /** Optional halo size base used for draft/fresh halo (in category mode). */
+  haloBaseSize?: number;
 }
 
 const DIM_OPACITY = 0.12;
@@ -60,6 +70,11 @@ export default function Graph3D(props: Graph3DProps) {
     onNodeClick,
     onNodeHover,
     onBackgroundClick,
+    colorByCategory,
+    pulseNodes,
+    nodeVal: nodeValProp,
+    nodeValScale,
+    haloBaseSize,
   } = props;
 
   const fgRef = useRef<ForceGraphMethods<FGNode, FGLink> | undefined>(undefined);
@@ -178,18 +193,20 @@ export default function Graph3D(props: Graph3DProps) {
   const nodeThreeObject = useCallback((n: FGNode) => {
     const node = n as GraphNode;
     const group = new THREE.Group();
+    const color = colorByCategory ? categoryColor(node.category) : nodeColor(node.type);
 
-    // Halo for drafts / freshly-updated notes.
+    // Halo for drafts / freshly-updated notes, or pulsing category nodes.
     const isFresh = node.recency === 0;
     const isDraft = node.status === "draft";
-    if (isDraft || isFresh) {
-      const size = 4 + (node.importance ?? 1) * 1.6;
+    const shouldPulse = pulseNodes?.has(node.id);
+    if (isDraft || isFresh || shouldPulse) {
+      const size = haloBaseSize ?? 4 + (node.importance ?? 1) * 1.6;
       const halo = new THREE.Mesh(
         new THREE.SphereGeometry(size + 3, 16, 16),
         new THREE.MeshBasicMaterial({
-          color: new THREE.Color(isDraft ? "#f59e0b" : nodeColor(node.type)),
+          color: new THREE.Color(isDraft ? "#f59e0b" : color),
           transparent: true,
-          opacity: 0.14,
+          opacity: shouldPulse ? 0.24 : 0.14,
           depthWrite: false,
         }),
       );
@@ -210,18 +227,18 @@ export default function Graph3D(props: Graph3DProps) {
     group.add(label);
 
     return group;
-  }, []);
+  }, [colorByCategory, pulseNodes, haloBaseSize]);
 
   // ---- Accessors ----------------------------------------------------------
   const getNodeColor = useCallback(
     (n: FGNode) => {
       const node = n as GraphNode;
-      const base = nodeColor(node.type);
+      const base = colorByCategory ? categoryColor(node.category) : nodeColor(node.type);
       if (!dimming) return base;
       const lit = highlightNodes.has(node.id) || pathNodes.has(node.id);
       return lit ? base : withOpacity(base, DIM_OPACITY);
     },
-    [dimming, highlightNodes, pathNodes],
+    [dimming, highlightNodes, pathNodes, colorByCategory],
   );
 
   const getLinkColor = useCallback(
@@ -255,10 +272,14 @@ export default function Graph3D(props: Graph3DProps) {
     [highlightLinks, pathLinks],
   );
 
-  const nodeVal = useCallback((n: FGNode) => {
-    const node = n as GraphNode;
-    return 1 + (node.importance ?? 1) * 1.4;
-  }, []);
+  const nodeVal = useCallback(
+    (n: FGNode) => {
+      const node = n as GraphNode;
+      const val = nodeValProp ? nodeValProp(node) : categoryNodeVal(node.importance);
+      return nodeValScale ? val * nodeValScale : val;
+    },
+    [nodeValProp, nodeValScale],
+  );
 
   const handleNodeClick = useCallback(
     (n: FGNode, event: MouseEvent) => onNodeClick(n as GraphNode, event),
@@ -269,10 +290,14 @@ export default function Graph3D(props: Graph3DProps) {
     [onNodeHover],
   );
 
-  const nodeLabel = useCallback((n: FGNode) => {
-    const node = n as GraphNode;
-    return `<div class="graph-label">${escapeHtml(node.title)} <span style="color:#6b6b7b">· ${node.type}</span></div>`;
-  }, []);
+  const nodeLabel = useCallback(
+    (n: FGNode) => {
+      const node = n as GraphNode;
+      const sub = colorByCategory ? node.category : node.type;
+      return `\u003cdiv class="graph-label"\u003e${escapeHtml(node.title)} \u003cspan style="color:#6b6b7b"\u003e· ${sub}\u003c/span\u003e\u003c/div\u003e`;
+    },
+    [colorByCategory],
+  );
 
   const { width, height } = size;
 

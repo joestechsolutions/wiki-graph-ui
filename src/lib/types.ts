@@ -41,6 +41,22 @@ export interface FrontmatterRelations {
   supersedes?: string[];
 }
 
+export type NodeCategory =
+  | "orchestrator"
+  | "coding"
+  | "memory"
+  | "code-intel"
+  | "skills"
+  | "discipline"
+  | "service"
+  | "docker"
+  | "llm"
+  | "model"
+  | "cron"
+  | "skill"
+  | "pipeline"
+  | "knowledge";
+
 export interface GraphNode {
   id: string;
   title: string;
@@ -60,6 +76,10 @@ export interface GraphNode {
   agent_generated: boolean;
   reviewed_by: ReviewedBy;
   confidence: Confidence;
+  /** Agent-system view category. */
+  category?: NodeCategory;
+  /** Extra system info (ports, services, schedules, model providers…). */
+  meta?: Record<string, unknown>;
 }
 
 export interface GraphLink {
