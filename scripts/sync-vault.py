@@ -222,7 +222,14 @@ def main():
     # Second pass: build edges and count backlinks
     backlink_counts = {n["id"]: 0 for n in nodes}
     
+    def resolve_link(target):
+        """Obsidian link text → slug. Accepts [[Folder/Note.md#heading|alias]] forms:
+        drop the heading, the folder path and the .md extension; match the bare note name."""
+        base = os.path.basename(target.split("#", 1)[0].strip())
+        return os.path.splitext(base)[0] if base.lower().endswith(".md") else base
+
     def add_edge(source, target, rel_type):
+        target = resolve_link(target)
         if source == target:
             return
         if target not in slug_to_id:
